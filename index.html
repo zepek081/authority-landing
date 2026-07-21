@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Authority extracts complete technical catalogs from Beatport and Spotify — every release, every ISRC — structured for PRO registration and CWR workflows. Built for independent music publishers.">
+    <meta name="description" content="Authority extracts complete technical catalogs from Beatport and Spotify, every release and every ISRC, structured for PRO registration and CWR workflows. Built for independent music publishers.">
     <title>Authority — Catalog Reconnaissance for Music Publishers</title>
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Authority — Catalog Reconnaissance for Music Publishers">
-    <meta property="og:description" content="Authority extracts complete technical catalogs from Beatport and Spotify — every release, every ISRC — structured for PRO registration and CWR workflows.">
+    <meta property="og:description" content="Authority extracts complete technical catalogs from Beatport and Spotify, every release and every ISRC, structured for PRO registration and CWR workflows.">
     <meta property="og:image" content="https://zepek081.github.io/authority-landing/media/authority-hero-poster.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Authority — Catalog Reconnaissance for Music Publishers">
-    <meta name="twitter:description" content="Authority extracts complete technical catalogs from Beatport and Spotify — every release, every ISRC — structured for PRO registration and CWR workflows.">
+    <meta name="twitter:description" content="Authority extracts complete technical catalogs from Beatport and Spotify, every release and every ISRC, structured for PRO registration and CWR workflows.">
     <meta name="twitter:image" content="https://zepek081.github.io/authority-landing/media/authority-hero-poster.png">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' fill='%23E87B2A'%3E%E2%97%86%3C/text%3E%3C/svg%3E">
 
@@ -231,6 +231,18 @@
         .wrap {
             padding: 0 20px;
         }
+        nav {
+            padding: 0 20px;
+        }
+        .nav-right {
+            gap: 14px;
+        }
+        .nav-link {
+            display: none;
+        }
+        .nav-cta {
+            padding: 8px 14px;
+        }
         .hero-h1 {
             font-size: clamp(40px, 10vw, 72px);
         }
@@ -246,6 +258,13 @@
         .about-grid {
             grid-template-columns: 1fr;
             gap: 16px;
+        }
+        .step-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+        }
+        .step-arrow {
+            display: none;
         }
         .sticky-col {
             position: static;
@@ -276,6 +295,7 @@
         <div class="nav-right">
             <a href="#about" class="nav-link">About</a>
             <a href="#features" class="nav-link">Features</a>
+            <a href="#faq" class="nav-link">FAQ</a>
             <a href="#contact" class="nav-cta">Free Sample →</a>
         </div>
     </nav>
@@ -294,10 +314,10 @@
                 <span>The foundation for every registration.</span>
             </h1>
             <p class="hero-sub">
-                Authority extracts the complete technical catalog from Beatport and Spotify — every release, every version, every ISRC — and structures it with your administrative data.<br>
-                One run per artist. Clean output. Ready for any PRO or CWR workflow.
+                Authority extracts the complete technical catalog from Beatport and Spotify: every release, every version, every ISRC, structured with your administrative data.<br>
+                One run per artist, ready for any PRO or CWR workflow.
             </p>
-            <p class="hero-trust">◆ Field-tested managing real catalogs — including <strong>Loose Club Edition</strong></p>
+            <p class="hero-trust">◆ Field-tested managing real catalogs, including <strong>Loose Club Edition</strong></p>
             <div class="hero-actions">
                 <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI'd%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="btn-cta">Get a Free Sample Report →</a>
                 <a href="#features" class="btn-ghost-link">How it works ↓</a>
@@ -328,22 +348,22 @@
         <div class="wrap">
             <p class="sec-label reveal">What Authority handles</p>
             <h2 class="sec-title reveal reveal-delay-1" style="margin-bottom: 0;">Three operational problems.<br><em>One structured output.</em></h2>
-            <p class="hero-sub reveal reveal-delay-2" style="margin-top: 0; margin-bottom: 40px;">Authority sits between the platform APIs and your administrative workflow. It handles the extraction, the data injection, and the output structure — so you start from a complete, verified record every time.</p>
+            <p class="hero-sub reveal reveal-delay-2" style="margin-top: 0; margin-bottom: 40px;">Authority sits between the platform APIs and your administrative workflow. It handles the extraction, the data injection, and the output structure, so you start from a complete, verified record every time.</p>
             <div class="pain-grid">
                 <div class="pain-cell reveal reveal-delay-1">
                     <div class="pain-icon">⏱</div>
                     <div class="pain-head">New signing. Full catalog, immediately.</div>
-                    <p class="pain-body">Authority queries Beatport and Spotify APIs and returns the complete published catalog — every ISRC, every version, every release date. First run: full back catalog. Every run after: only what's new. One structured file per artist, from day one of the relationship.</p>
+                    <p class="pain-body">Authority queries Beatport and Spotify APIs and returns the complete published catalog: every ISRC, every version, every release date. The first run pulls the full back catalog; every run after that, only what's new. One file per artist, from day one of the relationship.</p>
                 </div>
                 <div class="pain-cell reveal reveal-delay-2">
                     <div class="pain-icon">🔁</div>
                     <div class="pain-head">Your IPI/CAE data, injected at the ISRC level.</div>
-                    <p class="pain-body">Your validated IPI/CAE codes, society affiliations, writer and publisher data — entered once per artist, then automatically propagated across every newly discovered ISRC. The output carries both layers: the technical record from the platform, and the legal identity from your roster. No cross-referencing required.</p>
+                    <p class="pain-body">Your validated IPI/CAE codes, society affiliations, writer and publisher data get entered once per artist, then applied automatically to every ISRC Authority finds. The output carries both layers: the technical record from the platform, and the legal identity from your roster.</p>
                 </div>
                 <div class="pain-cell reveal reveal-delay-3">
                     <div class="pain-icon">⚠️</div>
                     <div class="pain-head">One sheet. Every field your workflow needs.</div>
-                    <p class="pain-body">The master sheet covers every publishing field — ISRC, UPC, title, version, label, release date, IPI/CAE, Society, splits. Formatted for direct import into royalty management systems, CWR generators, or PRO portals. Remixes and alternative versions are flagged and routed to a dedicated sheet automatically.</p>
+                    <p class="pain-body">The master sheet covers every publishing field: ISRC, UPC, title, version, label, release date, IPI/CAE, society, splits. It's formatted for direct import into royalty management systems, CWR generators, or PRO portals, and remixes or alternative versions get flagged and routed to a dedicated sheet automatically.</p>
                 </div>
             </div>
         </div>
@@ -370,23 +390,23 @@
                 "></div>
             </div>
 
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:48px;">
+            <div class="step-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:48px;">
                 <div style="background:var(--s1);padding:24px 28px;position:relative;">
                     <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--orange);margin-bottom:10px;">STEP 01 · EXTRACT</div>
                     <div style="font-family:var(--sans);font-size:14px;font-weight:700;margin-bottom:8px;">Full catalog. Both platforms. Every version.</div>
-                    <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.7;">Direct API query to Beatport v4 and Spotify. No manual exports. Returns every release, every version identifier, every ISRC across the artist's full history on both platforms. First run: complete back catalog. Subsequent runs: delta only.</p>
-                    <div style="position:absolute;right:-1px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:16px;color:var(--orange);z-index:1;">→</div>
+                    <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.7;">A direct API query to Beatport v4 and Spotify replaces manual exports. It returns every release, version, and ISRC across the artist's full history on both platforms: a complete back catalog on the first run, delta only on every run after.</p>
+                    <div class="step-arrow" style="position:absolute;right:-1px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:16px;color:var(--orange);z-index:1;">→</div>
                 </div>
                 <div style="background:var(--s1);padding:24px 28px;position:relative;">
                     <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--orange);margin-bottom:10px;">STEP 02 · INJECT</div>
                     <div style="font-family:var(--sans);font-size:14px;font-weight:700;margin-bottom:8px;">Administrative data, mapped to every ISRC.</div>
-                    <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.7;">Your validated IPI/CAE codes, society affiliations, writer and publisher data — entered once per artist, then automatically propagated across every newly discovered ISRC. The platform's technical layer and your administrative layer, merged into a single coherent output.</p>
-                    <div style="position:absolute;right:-1px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:16px;color:var(--orange);z-index:1;">→</div>
+                    <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.7;">You enter your IPI/CAE codes, society affiliations, and writer/publisher data once per artist. Authority applies them automatically to every new ISRC it finds, merging the platform's technical layer with your administrative layer into one output.</p>
+                    <div class="step-arrow" style="position:absolute;right:-1px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:16px;color:var(--orange);z-index:1;">→</div>
                 </div>
                 <div style="background:var(--s1);padding:24px 28px;">
                     <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--orange);margin-bottom:10px;">STEP 03 · DEPLOY</div>
                     <div style="font-family:var(--sans);font-size:14px;font-weight:700;margin-bottom:8px;">Structured output. Import anywhere.</div>
-                    <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.7;">A clean Excel master sheet — every field already mapped. Import directly into your royalty management system, feed your CWR generator, or use as the reference for PRO registration. The data layer is complete. What you do with it is yours.</p>
+                    <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.7;">A clean Excel master sheet has every field already mapped. Import it directly into your royalty management system, feed your CWR generator, or use it as the reference for PRO registration.</p>
                 </div>
             </div>
 
@@ -394,32 +414,32 @@
                 <div class="feat-cell reveal reveal-delay-1">
                     <div class="feat-num">01</div>
                     <div class="feat-title">Every version tracked. Every claim supported.</div>
-                    <p class="feat-desc">Original mix, radio edit, extended, instrumental — each version carries a distinct ISRC and is a separately registerable work. Authority identifies and separates every version automatically, providing a complete basis for registration.</p>
+                    <p class="feat-desc">Original mix, radio edit, extended, instrumental: each version carries a distinct ISRC and is a separately registerable work. Authority identifies and separates every version automatically, giving you a complete basis for registration.</p>
                 </div>
                 <div class="feat-cell reveal reveal-delay-2">
                     <div class="feat-num">02</div>
                     <div class="feat-title">Incremental extraction. Process only new releases.</div>
-                    <p class="feat-desc">Every extracted release is stored locally. Each run compares the live catalog against your existing data and pulls only what's new. Your catalog grows in lock‑step with the artists you manage — minimizing redundancy and ensuring version consistency.</p>
+                    <p class="feat-desc">Every extracted release is stored locally. Each run compares the live catalog against your existing data and pulls only what's new. Your catalog grows in lock-step with the artists you manage, minimizing redundancy and keeping versions consistent.</p>
                 </div>
                 <div class="feat-cell reveal reveal-delay-3">
                     <div class="feat-num">03</div>
                     <div class="feat-title">Remixes, tracked as distinct works.</div>
-                    <p class="feat-desc">Authority automatically identifies remixes, edits, radio versions and instrumentals and routes them to a dedicated sheet, correctly flagged. Each one is a potential alternative title — a separate registration, a separate royalty stream. They're handled automatically.</p>
+                    <p class="feat-desc">Authority automatically identifies remixes, edits, radio versions, and instrumentals, and routes them to a dedicated sheet, correctly flagged. Each one is a potential alternative title: a separate registration, a separate royalty stream.</p>
                 </div>
                 <div class="feat-cell reveal reveal-delay-1">
                     <div class="feat-num">04</div>
                     <div class="feat-title">The Administrative Source of Truth. CWR and PRO ready.</div>
-                    <p class="feat-desc">The master sheet is not a report — it is the authoritative reference for every downstream workflow. ISRC, UPC, IPI, Society affiliation, split structure, release date — every field the CWR standard or PRO portal requires, already present and structured. When your royalty management system, your CWR generator, or your collecting society submission expects clean input, this is the file it receives. One source. No reconciliation required.</p>
+                    <p class="feat-desc">The master sheet works as the authoritative reference for every downstream workflow: ISRC, UPC, IPI, society affiliation, split structure, release date, every field the CWR standard or PRO portal requires, already present and structured. Your royalty management system, your CWR generator, or your collecting society submission all take this file as clean input directly.</p>
                 </div>
                 <div class="feat-cell reveal reveal-delay-2">
                     <div class="feat-num">05</div>
                     <div class="feat-title">Your entire roster, processed in one run.</div>
-                    <p class="feat-desc">Upload a JSON with your full roster. Authority processes every artist in sequence — rate limiting, retry logic, and deduplication built in. One run to establish your baseline. Every run after that is incremental, targeted, and fast.</p>
+                    <p class="feat-desc">Upload a JSON with your full roster and Authority processes every artist in sequence, with rate limiting, retry logic, and deduplication built in. The first run establishes your baseline; every run after that is incremental, targeted, and fast.</p>
                 </div>
                 <div class="feat-cell reveal reveal-delay-3">
                     <div class="feat-num">06</div>
                     <div class="feat-title">Back catalog recovery, fully filterable.</div>
-                    <p class="feat-desc">Artists who have never had a publisher, or who are changing management, often have years of releases with no formal administrative record. Authority maps the entire published history retroactively — filterable by release date to isolate contract windows, sortable by version type to flag unregistered works. Identify versions, remixes, and old releases that were never reported to your administration. Recovery starts here.</p>
+                    <p class="feat-desc">Artists who never had a publisher, or who are changing management, often have years of releases with no formal administrative record. Authority maps the entire published history retroactively, filterable by release date to isolate contract windows and sortable by version type to flag unregistered works, so you can identify versions, remixes, and old releases that were never reported to your administration.</p>
                 </div>
             </div>
         </div>
@@ -450,40 +470,69 @@
                 <div>
                     <div class="story-block reveal">
                         <p class="story-year">The origin</p>
-                        <p class="story-main">Authority was built out of direct operational experience — not to explain the problem, but to eliminate it.</p>
-                        <p class="story-detail">Mosè Ruggiero has spent over a decade working inside music operations — with publishers, label managers, and catalog administrators, including Loose Club Edition. The catalog census was always the first bottleneck of every new relationship: manual, slow, and structurally incomplete. Authority applies enterprise API integration patterns to automate it entirely — the same class of problem, the domain he already knew from the inside.</p>
+                        <p class="story-main">Authority came directly out of operational experience managing catalogs, built to eliminate the census bottleneck itself.</p>
+                        <p class="story-detail">Mosè Ruggiero has spent over a decade working inside music operations, with publishers, label managers, and catalog administrators, including Loose Club Edition. The catalog census was always the first bottleneck of every new relationship: manual, slow, and structurally incomplete. Authority applies enterprise API integration patterns to automate it entirely, the same class of problem in a domain he already knew from the inside.</p>
                     </div>
                     <div class="story-block reveal reveal-delay-1">
                         <p class="story-year">The data layer is the foundation</p>
                         <p class="story-main">
-                            Registration quality starts with the record behind it.
+                            Bad registrations start with an incomplete or wrong technical record.
                         </p>
                         <p class="story-detail">
-                            When a work is missing an ISRC, carries an incorrect version identifier, or has never been formally mapped — the gap surfaces downstream, during claims or reconciliation. Authority ensures the technical record is complete and correct from the first run, so every subsequent workflow operates on solid ground.
+                            When a work is missing an ISRC, carries an incorrect version identifier, or was never formally mapped, you find out later, during claims or reconciliation. Authority makes sure the technical record is complete and correct from the first run, so every workflow after that starts on solid ground.
                         </p>
                     </div>
                     <div class="story-block reveal reveal-delay-2">
                         <p class="story-year">The technical background</p>
                         <p class="story-main">
-                            My professional work is enterprise system integration —
+                            My professional work is enterprise system integration:
                             <strong>API orchestration, data pipeline architecture, identity and access management at scale.</strong>
                         </p>
                         <p class="story-detail">
-                            The patterns I use in enterprise integration — connecting heterogeneous sources, normalising outputs, keeping systems in sync — are the same ones that make Authority work. It's a familiar class of problem, applied to a domain I already understood from years of working inside it.
+                            The patterns I use in enterprise integration, connecting heterogeneous sources, normalizing outputs, keeping systems in sync, are the same ones that make Authority work.
                         </p>
                     </div>
                     <div class="story-block reveal reveal-delay-3">
                         <p class="story-year">What you receive</p>
                         <p class="story-main">
-                            <strong>A complete, structured catalog record. First run to production-ready in one session.</strong>
+                            <strong>A complete, structured catalog record, production-ready from the first session.</strong>
                         </p>
                         <p class="story-detail">
-                            First run: full back catalog — every release, every version, filterable by date and version type.
-                            Every subsequent run: delta only — what's been published since the last extraction.
-                            The output is ready for direct use: royalty management, CWR generation, PRO registration.
-                            No reconstruction. No reconciliation. Already in order.
+                            The first run delivers the full back catalog, filterable by release date and version type.
+                            Every run after that returns only the delta: what's been published since the last extraction.
+                            The output is ready for direct use in royalty management, CWR generation, or PRO registration.
                         </p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <div class="wrap">
+            <p class="sec-label reveal">Before you write in</p>
+            <h2 class="sec-title reveal reveal-delay-1">Common questions,<br><em>answered directly.</em></h2>
+            <div style="border-top:1px solid var(--border);">
+                <div class="reveal reveal-delay-1" style="padding:28px 0; border-bottom:1px solid var(--border);">
+                    <div class="feat-title" style="margin-bottom:8px;">What do you need from me to run the free sample?</div>
+                    <p class="feat-desc">Just the artist's name and a link to their Beatport or Spotify page. No login credentials, no roster upload required for the sample.</p>
+                </div>
+                <div class="reveal reveal-delay-2" style="padding:28px 0; border-bottom:1px solid var(--border);">
+                    <div class="feat-title" style="margin-bottom:8px;">Is my roster data safe if I upload the full JSON later?</div>
+                    <p class="feat-desc">The roster file only carries artist identifiers and your existing IPI/CAE and publisher data, used to run the extraction. It isn't shared with anyone else.</p>
+                </div>
+                <div class="reveal reveal-delay-3" style="padding:28px 0; border-bottom:1px solid var(--border);">
+                    <div class="feat-title" style="margin-bottom:8px;">What if my catalog spans many artists?</div>
+                    <p class="feat-desc">The same extraction runs artist by artist, with rate limiting and deduplication built in, so a full roster is processed the same way as a single sample, just at scale.</p>
+                </div>
+                <div class="reveal reveal-delay-1" style="padding:28px 0; border-bottom:1px solid var(--border);">
+                    <div class="feat-title" style="margin-bottom:8px;">Am I committing to anything by requesting a sample?</div>
+                    <p class="feat-desc">No. Send one artist, see the actual output, decide from there.</p>
+                </div>
+                <div class="reveal reveal-delay-2" style="padding:28px 0;">
+                    <div class="feat-title" style="margin-bottom:8px;">Does this replace my PRO or CWR software?</div>
+                    <p class="feat-desc">No. Authority produces the structured input those systems need. What you do with the output, and which systems you feed it into, stays entirely up to you.</p>
                 </div>
             </div>
         </div>
@@ -493,7 +542,7 @@
     <div class="pitch">
         <div class="wrap pitch-inner">
             <p class="pitch-text">
-                Built for music publishers and rights managers.<br><em>See it work on your own catalog — free.</em>
+                Built for music publishers and rights managers.<br><em>See it work on your own catalog, free.</em>
             </p>
             <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI'd%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="btn-cta">Get a Free Sample Report →</a>
         </div>
@@ -507,7 +556,7 @@
                     <p class="sec-label reveal">Get in touch</p>
                     <h2 class="sec-title reveal reveal-delay-1" style="margin-bottom: 24px;">Write<br><em>directly.</em></h2>
                     <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.8;letter-spacing:0.02em;max-width:380px;" class="reveal reveal-delay-2">
-                        No forms, no demo scheduling. Send one artist from your roster and I’ll run the full extraction free — see exactly what you’d get before we talk about anything else.
+                        No forms, no demo scheduling. Send one artist from your roster and I’ll run the full extraction free, so you can see exactly what you’d get before we talk about anything else.
                     </p>
                 </div>
                 <div class="reveal reveal-delay-2">
