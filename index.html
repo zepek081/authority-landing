@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Authority extracts complete technical catalogs from Beatport and Spotify — every release, every ISRC — structured for PRO registration and CWR workflows. Built for independent music publishers.">
+    <title>Authority — Catalog Reconnaissance for Music Publishers</title>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Authority — Catalog Reconnaissance for Music Publishers">
+    <meta property="og:description" content="Authority extracts complete technical catalogs from Beatport and Spotify — every release, every ISRC — structured for PRO registration and CWR workflows.">
+    <meta property="og:image" content="https://zepek081.github.io/authority-landing/media/authority-hero-poster.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Authority — Catalog Reconnaissance for Music Publishers">
+    <meta name="twitter:description" content="Authority extracts complete technical catalogs from Beatport and Spotify — every release, every ISRC — structured for PRO registration and CWR workflows.">
+    <meta name="twitter:image" content="https://zepek081.github.io/authority-landing/media/authority-hero-poster.png">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' fill='%23E87B2A'%3E%E2%97%86%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Azeret+Mono:wght@300;400;500;600&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:        #05050A;
+            --s1:        #0D0D13;
+            --s2:        #131319;
+            --border:    rgba(255,255,255,0.06);
+            --border-hi: rgba(255,255,255,0.13);
+            --orange:     #E87B2A;
+            --orange-dim: rgba(232,123,42,0.12);
+            --orange-glow:rgba(232,123,42,0.25);
+            --white:     #EDEAE2;
+            --off:       #BFBCB4;
+            --grey:      #6A6760;
+            --grey-mid:  #9A9790;
+            --serif:  'Instrument Serif', Georgia, serif;
+            --mono:   'Azeret Mono', monospace;
+            --sans:   'Syne', sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: var(--sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; height: 56px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px;
+            background: rgba(6,6,10,0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+        .nav-logo { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-decoration: none; color: var(--white); }
+        .nav-logo em { font-style: normal; color: var(--orange); }
+        .nav-right { display: flex; align-items: center; gap: 32px; }
+        .nav-link { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--grey-mid); text-decoration: none; transition: color 0.15s; }
+        .nav-link:hover { color: var(--white); }
+        .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: var(--orange); color: #06060A; padding: 8px 18px; text-decoration: none; font-weight: 500; transition: all 0.15s; }
+        .nav-cta:hover { background: #F08840; transform: translateY(-1px); }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            padding-top: 56px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg-text {
+            position: absolute;
+            bottom: -30px; left: -8px;
+            font-family: var(--sans);
+            font-size: clamp(120px, 22vw, 300px);
+            font-weight: 800;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.035);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+            z-index: 0;
+        }
+        .hero-glow {
+            position: absolute;
+            top: 25%; right: -80px;
+            width: 520px; height: 520px;
+            background: radial-gradient(ellipse, rgba(232,123,42,0.06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 0 60px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); margin-bottom: 28px; opacity: 0; animation: fadeUp 0.6s ease 0.1s forwards; }
+        .hero-h1 { font-family: var(--serif); font-size: clamp(56px, 8vw, 112px); line-height: 1.0; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 36px; opacity: 0; animation: fadeUp 0.7s ease 0.2s forwards; text-wrap: balance; }
+        .hero-h1 em { font-style: italic; color: var(--off); }
+        .hero-sub { font-family: var(--mono); font-size: 13px; color: var(--grey-mid); line-height: 1.75; max-width: 460px; letter-spacing: 0.02em; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.7s ease 0.35s forwards; }
+        .hero-trust { font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em; color: var(--grey-mid); margin-bottom: 32px; opacity: 0; animation: fadeUp 0.7s ease 0.45s forwards; }
+        .hero-trust strong { color: var(--white); font-weight: 500; }
+        .hero-actions { display: flex; align-items: center; gap: 24px; opacity: 0; animation: fadeUp 0.7s ease 0.6s forwards; }
+        .btn-cta { display: inline-flex; align-items: center; gap: 10px; background: var(--orange); color: #06060A; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; padding: 15px 32px; text-decoration: none; transition: all 0.15s; }
+        .btn-cta:hover { background: #F08840; transform: translateY(-2px); box-shadow: 0 8px 32px var(--orange-glow); }
+        .btn-ghost-link { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; color: var(--grey-mid); text-decoration: none; transition: color 0.15s; }
+        .btn-ghost-link:hover { color: var(--white); }
+
+        .hero-bottom {
+            padding: 28px 0;
+            border-top: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            position: relative; z-index: 1;
+            opacity: 0; animation: fadeUp 0.6s ease 0.7s forwards;
+        }
+        .hero-stats { display: flex; gap: 48px; }
+        .stat-n { font-family: var(--mono); font-size: 22px; font-weight: 500; line-height: 1; margin-bottom: 4px; }
+        .stat-l { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); }
+        .hero-badge { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--grey); padding: 8px 14px; border: 1px solid var(--border); }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* PAIN SECTION */
+        .pain { padding: 80px 0; border-top: 1px solid var(--border); background: var(--s1); }
+        .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 40px; }
+        .pain-cell { background: var(--s1); padding: 28px 26px; }
+        .pain-cell:hover { background: var(--s2); }
+        .pain-icon { font-size: 18px; margin-bottom: 14px; }
+        .pain-head { font-family: var(--sans); font-size: 13px; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.03em; }
+        .pain-body { font-family: var(--mono); font-size: 11px; color: var(--grey-mid); line-height: 1.8; letter-spacing: 0.02em; }
+
+        /* FEATURES */
+        .section { padding: 120px 0; border-top: 1px solid var(--border); }
+        .sec-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
+        .sec-title { font-family: var(--serif); font-size: clamp(36px, 5vw, 58px); line-height: 1.1; font-weight: 400; margin-bottom: 72px; text-wrap: balance; }
+        .sec-title em { font-style: italic; color: var(--off); }
+
+        .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .feat-cell { background: var(--s1); padding: 36px 30px; transition: background 0.2s; }
+        .feat-cell:hover { background: var(--s2); }
+        .feat-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--orange); margin-bottom: 18px; }
+        .feat-title { font-family: var(--sans); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 10px; }
+        .feat-desc { font-family: var(--mono); font-size: 11px; color: var(--grey-mid); line-height: 1.8; letter-spacing: 0.02em; }
+
+        /* ABOUT */
+        .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; }
+        .sticky-col { position: sticky; top: 80px; }
+        .about-name { font-family: var(--serif); font-size: 54px; line-height: 1.05; font-weight: 400; margin-bottom: 14px; }
+        .about-name em { font-style: italic; color: var(--off); }
+        .about-role { font-family: var(--mono); font-size: 10.5px; color: var(--grey-mid); letter-spacing: 0.08em; line-height: 1.75; margin-bottom: 28px; }
+        .tag { display: inline-block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; padding: 5px 10px; border: 1px solid var(--border-hi); color: var(--grey-mid); margin: 0 4px 6px 0; }
+
+        .story-block { margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+        .story-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .story-year { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--orange); margin-bottom: 12px; }
+        .story-main { font-family: var(--serif); font-size: 21px; line-height: 1.65; color: var(--off); margin-bottom: 12px; text-wrap: balance; }
+        .story-main strong { color: var(--white); font-weight: 400; }
+        .story-detail { font-family: var(--mono); font-size: 11px; color: var(--grey); line-height: 1.8; letter-spacing: 0.03em; }
+
+        /* PITCH BANNER */
+        .pitch { padding: 80px 0; background: var(--s1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .pitch-inner { display: flex; align-items: center; justify-content: space-between; gap: 60px; flex-wrap: wrap; }
+        .pitch-text { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 46px); line-height: 1.2; font-weight: 400; max-width: 680px; text-wrap: balance; }
+        .pitch-text em { font-style: italic; color: var(--orange); }
+
+        /* FOOTER */
+        footer { padding: 36px 0; border-top: 1px solid var(--border); }
+        .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .footer-logo { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; color: var(--grey); }
+        .footer-logo em { font-style: normal; color: var(--orange); }
+        .footer-right { display: flex; gap: 24px; align-items: center; }
+        .footer-right a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--grey); text-decoration: none; transition: color 0.15s; }
+        .footer-right a:hover { color: var(--white); }
+        /* SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.10s; }
+        .reveal-delay-2 { transition-delay: 0.20s; }
+        .reveal-delay-3 { transition-delay: 0.30s; }
+        .reveal-delay-4 { transition-delay: 0.40s; }
+
+        /* Email display */
+        .contact-email {
+            font-family: var(--mono);
+            font-size: 18px;
+            background: var(--s1);
+            border: 1px solid var(--border-hi);
+            padding: 20px 24px;
+            display: inline-block;
+            color: var(--orange);
+            text-decoration: none;
+            transition: border-color 0.15s;
+            word-break: break-all;
+        }
+        .contact-email:hover {
+            border-color: var(--orange);
+        }
+		
+		 @media (max-width: 768px) {
+        .wrap {
+            padding: 0 20px;
+        }
+        .hero-h1 {
+            font-size: clamp(40px, 10vw, 72px);
+        }
+        .hero-sub {
+            max-width: 100%;
+        }
+        .hero-stats {
+            flex-direction: column;
+            gap: 16px;
+        }
+        .pain-grid,
+        .feat-grid,
+        .about-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        .sticky-col {
+            position: static;
+        }
+        .about-grid {
+            gap: 40px;
+        }
+        .pitch-inner {
+            flex-direction: column;
+            text-align: center;
+        }
+        #contact > div > div {
+            grid-template-columns: 1fr !important;
+            gap: 40px;
+        }
+        .contact-email {
+            font-size: 16px;
+            padding: 16px;
+            word-break: break-all;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <nav aria-label="Primary navigation">
+        <a href="/" class="nav-logo" aria-label="Authority — Home"><em aria-hidden="true">◆</em> AUTHORITY</a>
+        <div class="nav-right">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#contact" class="nav-cta">Free Sample →</a>
+        </div>
+    </nav>
+
+    <main>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-bg-text">AUTHORITY</div>
+        <div class="hero-glow"></div>
+
+        <div class="wrap hero-inner">
+            <p class="hero-eyebrow">Music Publishers · Rights Managers · Independent Artists</p>
+            <h1 class="hero-h1" id="hero-heading">
+                <span>New artist. Full catalog.</span><br>
+                <em>Structured and complete.</em><br>
+                <span>The foundation for every registration.</span>
+            </h1>
+            <p class="hero-sub">
+                Authority extracts the complete technical catalog from Beatport and Spotify — every release, every version, every ISRC — and structures it with your administrative data.<br>
+                One run per artist. Clean output. Ready for any PRO or CWR workflow.
+            </p>
+            <p class="hero-trust">◆ Field-tested managing real catalogs — including <strong>Loose Club Edition</strong></p>
+            <div class="hero-actions">
+                <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI'd%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="btn-cta">Get a Free Sample Report →</a>
+                <a href="#features" class="btn-ghost-link">How it works ↓</a>
+            </div>
+        </div>
+
+        <div class="wrap hero-bottom">
+            <div class="hero-stats">
+                <div>
+                    <div class="stat-n">2</div>
+                    <div class="stat-l">sources · Beatport + Spotify</div>
+                </div>
+                <div>
+                    <div class="stat-n">Δ</div>
+                    <div class="stat-l">Incremental by design · process only what changes</div>
+                </div>
+                <div>
+                    <div class="stat-n" style="font-size:13px; padding-top:4px;">PRO-agnostic</div>
+                    <div class="stat-l">Any workflow · Any collecting society</div>
+                </div>
+            </div>
+            <div class="hero-badge">Naples, Italy · 2026</div>
+        </div>
+    </section>
+
+    <!-- PAIN SECTION -->
+    <section class="pain">
+        <div class="wrap">
+            <p class="sec-label reveal">What Authority handles</p>
+            <h2 class="sec-title reveal reveal-delay-1" style="margin-bottom: 0;">Three operational problems.<br><em>One structured output.</em></h2>
+            <p class="hero-sub reveal reveal-delay-2" style="margin-top: 0; margin-bottom: 40px;">Authority sits between the platform APIs and your administrative workflow. It handles the extraction, the data injection, and the output structure — so you start from a complete, verified record every time.</p>
+            <div class="pain-grid">
+                <div class="pain-cell reveal reveal-delay-1">
+                    <div class="pain-icon">⏱</div>
+                    <div class="pain-head">New signing. Full catalog, immediately.</div>
+                    <p class="pain-body">Authority queries Beatport and Spotify APIs and returns the complete published catalog — every ISRC, every version, every release date. First run: full back catalog. Every run after: only what's new. One structured file per artist, from day one of the relationship.</p>
+                </div>
+                <div class="pain-cell reveal reveal-delay-2">
+                    <div class="pain-icon">🔁</div>
+                    <div class="pain-head">Your IPI/CAE data, injected at the ISRC level.</div>
+                    <p class="pain-body">Your validated IPI/CAE codes, society affiliations, writer and publisher data — entered once per artist, then automatically propagated across every newly discovered ISRC. The output carries both layers: the technical record from the platform, and the legal identity from your roster. No cross-referencing required.</p>
+                </div>
+                <div class="pain-cell reveal reveal-delay-3">
+                    <div class="pain-icon">⚠️</div>
+                    <div class="pain-head">One sheet. Every field your workflow needs.</div>
+                    <p class="pain-body">The master sheet covers every publishing field — ISRC, UPC, title, version, label, release date, IPI/CAE, Society, splits. Formatted for direct import into royalty management systems, CWR generators, or PRO portals. Remixes and alternative versions are flagged and routed to a dedicated sheet automatically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+        <div class="wrap">
+            <p class="sec-label reveal">How Authority works</p>
+            <h2 class="sec-title reveal reveal-delay-1">Three steps.<br><em>Clean, structured, deployable.</em></h2>
+
+            <div class="reveal reveal-delay-2" style="position:relative; margin-bottom:56px;">
+                <video
+                    src="media/authority-hero.mp4"
+                    poster="media/authority-hero-poster.png"
+                    autoplay loop muted playsinline preload="metadata"
+                    style="display:block; width:100%; height:auto;"
+                    aria-label="Animation showing scattered ISRC records converging into a structured Authority master sheet"
+                ></video>
+                <div aria-hidden="true" style="
+                    position:absolute; bottom:0; left:0; right:0; height:38%;
+                    background:linear-gradient(to bottom, transparent 0%, rgba(5,5,10,0.6) 60%, #05050A 100%);
+                    pointer-events:none;
+                "></div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:48px;">
+                <div style="background:var(--s1);padding:24px 28px;position:relative;">
+                    <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--orange);margin-bottom:10px;">STEP 01 · EXTRACT</div>
+                    <div style="font-family:var(--sans);font-size:14px;font-weight:700;margin-bottom:8px;">Full catalog. Both platforms. Every version.</div>
+                    <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.7;">Direct API query to Beatport v4 and Spotify. No manual exports. Returns every release, every version identifier, every ISRC across the artist's full history on both platforms. First run: complete back catalog. Subsequent runs: delta only.</p>
+                    <div style="position:absolute;right:-1px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:16px;color:var(--orange);z-index:1;">→</div>
+                </div>
+                <div style="background:var(--s1);padding:24px 28px;position:relative;">
+                    <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--orange);margin-bottom:10px;">STEP 02 · INJECT</div>
+                    <div style="font-family:var(--sans);font-size:14px;font-weight:700;margin-bottom:8px;">Administrative data, mapped to every ISRC.</div>
+                    <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.7;">Your validated IPI/CAE codes, society affiliations, writer and publisher data — entered once per artist, then automatically propagated across every newly discovered ISRC. The platform's technical layer and your administrative layer, merged into a single coherent output.</p>
+                    <div style="position:absolute;right:-1px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:16px;color:var(--orange);z-index:1;">→</div>
+                </div>
+                <div style="background:var(--s1);padding:24px 28px;">
+                    <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--orange);margin-bottom:10px;">STEP 03 · DEPLOY</div>
+                    <div style="font-family:var(--sans);font-size:14px;font-weight:700;margin-bottom:8px;">Structured output. Import anywhere.</div>
+                    <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.7;">A clean Excel master sheet — every field already mapped. Import directly into your royalty management system, feed your CWR generator, or use as the reference for PRO registration. The data layer is complete. What you do with it is yours.</p>
+                </div>
+            </div>
+
+            <div class="feat-grid">
+                <div class="feat-cell reveal reveal-delay-1">
+                    <div class="feat-num">01</div>
+                    <div class="feat-title">Every version tracked. Every claim supported.</div>
+                    <p class="feat-desc">Original mix, radio edit, extended, instrumental — each version carries a distinct ISRC and is a separately registerable work. Authority identifies and separates every version automatically, providing a complete basis for registration.</p>
+                </div>
+                <div class="feat-cell reveal reveal-delay-2">
+                    <div class="feat-num">02</div>
+                    <div class="feat-title">Incremental extraction. Process only new releases.</div>
+                    <p class="feat-desc">Every extracted release is stored locally. Each run compares the live catalog against your existing data and pulls only what's new. Your catalog grows in lock‑step with the artists you manage — minimizing redundancy and ensuring version consistency.</p>
+                </div>
+                <div class="feat-cell reveal reveal-delay-3">
+                    <div class="feat-num">03</div>
+                    <div class="feat-title">Remixes, tracked as distinct works.</div>
+                    <p class="feat-desc">Authority automatically identifies remixes, edits, radio versions and instrumentals and routes them to a dedicated sheet, correctly flagged. Each one is a potential alternative title — a separate registration, a separate royalty stream. They're handled automatically.</p>
+                </div>
+                <div class="feat-cell reveal reveal-delay-1">
+                    <div class="feat-num">04</div>
+                    <div class="feat-title">The Administrative Source of Truth. CWR and PRO ready.</div>
+                    <p class="feat-desc">The master sheet is not a report — it is the authoritative reference for every downstream workflow. ISRC, UPC, IPI, Society affiliation, split structure, release date — every field the CWR standard or PRO portal requires, already present and structured. When your royalty management system, your CWR generator, or your collecting society submission expects clean input, this is the file it receives. One source. No reconciliation required.</p>
+                </div>
+                <div class="feat-cell reveal reveal-delay-2">
+                    <div class="feat-num">05</div>
+                    <div class="feat-title">Your entire roster, processed in one run.</div>
+                    <p class="feat-desc">Upload a JSON with your full roster. Authority processes every artist in sequence — rate limiting, retry logic, and deduplication built in. One run to establish your baseline. Every run after that is incremental, targeted, and fast.</p>
+                </div>
+                <div class="feat-cell reveal reveal-delay-3">
+                    <div class="feat-num">06</div>
+                    <div class="feat-title">Back catalog recovery, fully filterable.</div>
+                    <p class="feat-desc">Artists who have never had a publisher, or who are changing management, often have years of releases with no formal administrative record. Authority maps the entire published history retroactively — filterable by release date to isolate contract windows, sortable by version type to flag unregistered works. Identify versions, remixes, and old releases that were never reported to your administration. Recovery starts here.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+        <div class="wrap">
+            <div class="about-grid">
+                <div class="sticky-col">
+                    <p class="sec-label reveal">The person behind it</p>
+                    <h2 class="about-name reveal reveal-delay-1">Mosè<br><em>Ruggiero</em></h2>
+                    <p class="about-role reveal reveal-delay-2">
+                        Senior System Integrator<br>
+                        Enterprise Integration · Data Pipelines<br>
+                        Naples, Italy
+                    </p>
+                    <div>
+                        <span class="tag">Python</span>
+                        <span class="tag">API Integration</span>
+                        <span class="tag">Data Pipelines</span>
+                        <span class="tag">Platform APIs</span>
+                        <span class="tag">Music Metadata</span>
+                        <span class="tag">Digital Rights</span>
+                        <span class="tag">CWR Standards</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="story-block reveal">
+                        <p class="story-year">The origin</p>
+                        <p class="story-main">Authority was built out of direct operational experience — not to explain the problem, but to eliminate it.</p>
+                        <p class="story-detail">Mosè Ruggiero has spent over a decade working inside music operations — with publishers, label managers, and catalog administrators, including Loose Club Edition. The catalog census was always the first bottleneck of every new relationship: manual, slow, and structurally incomplete. Authority applies enterprise API integration patterns to automate it entirely — the same class of problem, the domain he already knew from the inside.</p>
+                    </div>
+                    <div class="story-block reveal reveal-delay-1">
+                        <p class="story-year">The data layer is the foundation</p>
+                        <p class="story-main">
+                            Registration quality starts with the record behind it.
+                        </p>
+                        <p class="story-detail">
+                            When a work is missing an ISRC, carries an incorrect version identifier, or has never been formally mapped — the gap surfaces downstream, during claims or reconciliation. Authority ensures the technical record is complete and correct from the first run, so every subsequent workflow operates on solid ground.
+                        </p>
+                    </div>
+                    <div class="story-block reveal reveal-delay-2">
+                        <p class="story-year">The technical background</p>
+                        <p class="story-main">
+                            My professional work is enterprise system integration —
+                            <strong>API orchestration, data pipeline architecture, identity and access management at scale.</strong>
+                        </p>
+                        <p class="story-detail">
+                            The patterns I use in enterprise integration — connecting heterogeneous sources, normalising outputs, keeping systems in sync — are the same ones that make Authority work. It's a familiar class of problem, applied to a domain I already understood from years of working inside it.
+                        </p>
+                    </div>
+                    <div class="story-block reveal reveal-delay-3">
+                        <p class="story-year">What you receive</p>
+                        <p class="story-main">
+                            <strong>A complete, structured catalog record. First run to production-ready in one session.</strong>
+                        </p>
+                        <p class="story-detail">
+                            First run: full back catalog — every release, every version, filterable by date and version type.
+                            Every subsequent run: delta only — what's been published since the last extraction.
+                            The output is ready for direct use: royalty management, CWR generation, PRO registration.
+                            No reconstruction. No reconciliation. Already in order.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PITCH -->
+    <div class="pitch">
+        <div class="wrap pitch-inner">
+            <p class="pitch-text">
+                Built for music publishers and rights managers.<br><em>See it work on your own catalog — free.</em>
+            </p>
+            <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI'd%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="btn-cta">Get a Free Sample Report →</a>
+        </div>
+    </div>
+
+    <!-- CONTACT (simplified) -->
+    <section class="section" id="contact" style="padding: 100px 0; border-top: 1px solid var(--border);">
+        <div class="wrap">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+                <div>
+                    <p class="sec-label reveal">Get in touch</p>
+                    <h2 class="sec-title reveal reveal-delay-1" style="margin-bottom: 24px;">Write<br><em>directly.</em></h2>
+                    <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.8;letter-spacing:0.02em;max-width:380px;" class="reveal reveal-delay-2">
+                        No forms, no demo scheduling. Send one artist from your roster and I’ll run the full extraction free — see exactly what you’d get before we talk about anything else.
+                    </p>
+                </div>
+                <div class="reveal reveal-delay-2">
+                    <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI'd%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="contact-email">mose.ruggiero@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="wrap footer-inner">
+            <div class="footer-logo"><em aria-hidden="true">◆</em> AUTHORITY · by Mosè Ruggiero</div>
+            <div class="footer-right">
+                <a href="#contact">Contact</a>
+                <a href="https://www.linkedin.com/in/moseruggiero/" target="_blank" rel="noopener">LinkedIn</a>
+                <span style="color: var(--grey); font-family: var(--mono); font-size: 10px;">Naples, Italy · © 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // SCROLL REVEAL — Intersection Observer
+        (function() {
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            document.querySelectorAll('.reveal').forEach(function(el) {
+                observer.observe(el);
+            });
+        })();
+    </script>
+</body>
+</html>
