@@ -67,6 +67,12 @@
         .wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
         /* NAV — edge-aligned floating chips, not a full-width bar */
+        .nav-scrim {
+            position: fixed; top: 0; left: 0; right: 0; height: 110px;
+            background: linear-gradient(to bottom, rgba(5,5,10,0.92) 0%, rgba(5,5,10,0.55) 55%, transparent 100%);
+            pointer-events: none;
+            z-index: 99;
+        }
         nav {
             position: fixed; top: 20px; left: 20px; right: 20px;
             display: flex; align-items: flex-start; justify-content: space-between;
@@ -250,6 +256,9 @@
         .wrap {
             padding: 0 20px;
         }
+        .nav-scrim {
+            height: 90px;
+        }
         nav {
             top: 12px; left: 12px; right: 12px;
         }
@@ -317,6 +326,7 @@
 </head>
 <body>
     <!-- NAV -->
+    <div class="nav-scrim" aria-hidden="true"></div>
     <nav aria-label="Primary navigation">
         <a href="/" class="nav-logo" aria-label="Authority — Home"><em aria-hidden="true">◆</em> AUTHORITY</a>
         <div class="nav-right">
