@@ -22,7 +22,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Azeret+Mono:wght@300;400;500;600&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Azeret+Mono:wght@300;400;500;600&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -44,6 +44,10 @@
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--orange);
+            outline-offset: 3px;
+        }
         body {
             background: var(--bg);
             color: var(--white);
@@ -62,19 +66,30 @@
 
         .wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
-        /* NAV */
+        /* NAV — edge-aligned floating chips, not a full-width bar */
         nav {
-            position: fixed; top: 0; left: 0; right: 0; height: 56px;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 40px;
-            background: rgba(6,6,10,0.85);
-            backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border);
+            position: fixed; top: 20px; left: 20px; right: 20px;
+            display: flex; align-items: flex-start; justify-content: space-between;
+            pointer-events: none;
             z-index: 100;
         }
-        .nav-logo { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-decoration: none; color: var(--white); }
+        .nav-logo {
+            pointer-events: auto;
+            font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-decoration: none; color: var(--white);
+            background: rgba(13,13,19,0.85);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border-hi);
+            padding: 10px 16px;
+        }
         .nav-logo em { font-style: normal; color: var(--orange); }
-        .nav-right { display: flex; align-items: center; gap: 32px; }
+        .nav-right {
+            pointer-events: auto;
+            display: flex; align-items: center; gap: 28px;
+            background: rgba(13,13,19,0.85);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border-hi);
+            padding: 10px 20px;
+        }
         .nav-link { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--grey-mid); text-decoration: none; transition: color 0.15s; }
         .nav-link:hover { color: var(--white); }
         .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: var(--orange); color: #06060A; padding: 8px 18px; text-decoration: none; font-weight: 500; transition: all 0.15s; }
@@ -83,7 +98,7 @@
         /* HERO */
         .hero {
             min-height: 100vh;
-            padding-top: 56px;
+            padding-top: 100px;
             display: flex;
             flex-direction: column;
             position: relative;
@@ -121,12 +136,12 @@
         }
         .hero-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); margin-bottom: 28px; opacity: 0; animation: fadeUp 0.6s ease 0.1s forwards; }
         .hero-h1 { font-family: var(--serif); font-size: clamp(56px, 8vw, 112px); line-height: 1.0; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 36px; opacity: 0; animation: fadeUp 0.7s ease 0.2s forwards; text-wrap: balance; }
-        .hero-h1 em { font-style: italic; color: var(--off); }
+        .hero-h1 em { font-style: normal; color: var(--off); }
         .hero-sub { font-family: var(--mono); font-size: 13px; color: var(--grey-mid); line-height: 1.75; max-width: 460px; letter-spacing: 0.02em; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.7s ease 0.35s forwards; }
         .hero-trust { font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em; color: var(--grey-mid); margin-bottom: 32px; opacity: 0; animation: fadeUp 0.7s ease 0.45s forwards; }
         .hero-trust strong { color: var(--white); font-weight: 500; }
-        .hero-actions { display: flex; align-items: center; gap: 24px; opacity: 0; animation: fadeUp 0.7s ease 0.6s forwards; }
-        .btn-cta { display: inline-flex; align-items: center; gap: 10px; background: var(--orange); color: #06060A; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; padding: 15px 32px; text-decoration: none; transition: all 0.15s; }
+        .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 20px 24px; opacity: 0; animation: fadeUp 0.7s ease 0.6s forwards; }
+        .btn-cta { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; background: var(--orange); color: #06060A; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; padding: 15px 32px; text-decoration: none; transition: all 0.15s; }
         .btn-cta:hover { background: #F08840; transform: translateY(-2px); box-shadow: 0 8px 32px var(--orange-glow); }
         .btn-ghost-link { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; color: var(--grey-mid); text-decoration: none; transition: color 0.15s; }
         .btn-ghost-link:hover { color: var(--white); }
@@ -148,20 +163,20 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* PAIN SECTION */
+        /* PAIN SECTION — stacked list, not a boxed grid */
         .pain { padding: 80px 0; border-top: 1px solid var(--border); background: var(--s1); }
-        .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 40px; }
-        .pain-cell { background: var(--s1); padding: 28px 26px; }
-        .pain-cell:hover { background: var(--s2); }
-        .pain-icon { font-size: 18px; margin-bottom: 14px; }
-        .pain-head { font-family: var(--sans); font-size: 13px; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.03em; }
-        .pain-body { font-family: var(--mono); font-size: 11px; color: var(--grey-mid); line-height: 1.8; letter-spacing: 0.02em; }
+        .pain-list { margin-top: 40px; }
+        .pain-row { display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 32px 0; border-top: 1px solid var(--border); }
+        .pain-row:last-child { border-bottom: 1px solid var(--border); }
+        .pain-num { font-family: var(--mono); font-size: 13px; color: var(--orange); letter-spacing: 0.1em; padding-top: 2px; }
+        .pain-head { font-family: var(--sans); font-size: 15px; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.02em; }
+        .pain-body { font-family: var(--mono); font-size: 11px; color: var(--grey-mid); line-height: 1.8; letter-spacing: 0.02em; max-width: 640px; }
 
         /* FEATURES */
         .section { padding: 120px 0; border-top: 1px solid var(--border); }
         .sec-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
         .sec-title { font-family: var(--serif); font-size: clamp(36px, 5vw, 58px); line-height: 1.1; font-weight: 400; margin-bottom: 72px; text-wrap: balance; }
-        .sec-title em { font-style: italic; color: var(--off); }
+        .sec-title em { font-style: normal; color: var(--off); }
 
         .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
         .feat-cell { background: var(--s1); padding: 36px 30px; transition: background 0.2s; }
@@ -174,7 +189,7 @@
         .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; }
         .sticky-col { position: sticky; top: 80px; }
         .about-name { font-family: var(--serif); font-size: 54px; line-height: 1.05; font-weight: 400; margin-bottom: 14px; }
-        .about-name em { font-style: italic; color: var(--off); }
+        .about-name em { font-style: normal; color: var(--off); }
         .about-role { font-family: var(--mono); font-size: 10.5px; color: var(--grey-mid); letter-spacing: 0.08em; line-height: 1.75; margin-bottom: 28px; }
         .tag { display: inline-block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; padding: 5px 10px; border: 1px solid var(--border-hi); color: var(--grey-mid); margin: 0 4px 6px 0; }
 
@@ -189,7 +204,7 @@
         .pitch { padding: 80px 0; background: var(--s1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
         .pitch-inner { display: flex; align-items: center; justify-content: space-between; gap: 60px; flex-wrap: wrap; }
         .pitch-text { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 46px); line-height: 1.2; font-weight: 400; max-width: 680px; text-wrap: balance; }
-        .pitch-text em { font-style: italic; color: var(--orange); }
+        .pitch-text em { font-style: normal; color: var(--orange); }
 
         /* FOOTER */
         footer { padding: 36px 0; border-top: 1px solid var(--border); }
@@ -236,10 +251,14 @@
             padding: 0 20px;
         }
         nav {
-            padding: 0 20px;
+            top: 12px; left: 12px; right: 12px;
+        }
+        .nav-logo {
+            padding: 8px 12px;
         }
         .nav-right {
             gap: 14px;
+            padding: 8px 14px;
         }
         .nav-link {
             display: none;
@@ -257,11 +276,15 @@
             flex-direction: column;
             gap: 16px;
         }
-        .pain-grid,
         .feat-grid,
         .about-grid {
             grid-template-columns: 1fr;
             gap: 16px;
+        }
+        .pain-row {
+            grid-template-columns: 36px 1fr;
+            gap: 14px;
+            padding: 24px 0;
         }
         .step-grid {
             grid-template-columns: 1fr !important;
@@ -323,7 +346,7 @@
             </p>
             <p class="hero-trust">◆ Field-tested managing real catalogs, including <strong>Loose Club Edition</strong></p>
             <div class="hero-actions">
-                <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI'd%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="btn-cta">Get a Free Sample Report →</a>
+                <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI%E2%80%99d%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="btn-cta">Get a free sample →</a>
                 <a href="#features" class="btn-ghost-link">How it works ↓</a>
             </div>
         </div>
@@ -350,24 +373,29 @@
     <!-- PAIN SECTION -->
     <section class="pain">
         <div class="wrap">
-            <p class="sec-label reveal">What Authority handles</p>
-            <h2 class="sec-title reveal reveal-delay-1" style="margin-bottom: 0;">Three operational problems.<br><em>One structured output.</em></h2>
-            <p class="hero-sub reveal reveal-delay-2" style="margin-top: 0; margin-bottom: 40px;">Authority sits between the platform APIs and your administrative workflow. It handles the extraction, the data injection, and the output structure, so you start from a complete, verified record every time.</p>
-            <div class="pain-grid">
-                <div class="pain-cell reveal reveal-delay-1">
-                    <div class="pain-icon">⏱</div>
-                    <div class="pain-head">New signing. Full catalog, immediately.</div>
-                    <p class="pain-body">Authority queries Beatport and Spotify APIs and returns the complete published catalog: every ISRC, every version, every release date. The first run pulls the full back catalog; every run after that, only what's new. One file per artist, from day one of the relationship.</p>
+            <h2 class="sec-title reveal" style="margin-bottom: 0;">Three operational problems.<br><em>One structured output.</em></h2>
+            <p class="hero-sub reveal reveal-delay-1" style="margin-top: 0; margin-bottom: 0;">Authority sits between the platform APIs and your administrative workflow. It handles the extraction, the data injection, and the output structure, so you start from a complete, verified record every time.</p>
+            <div class="pain-list">
+                <div class="pain-row reveal reveal-delay-1">
+                    <div class="pain-num">01</div>
+                    <div>
+                        <div class="pain-head">New signing. Full catalog, immediately.</div>
+                        <p class="pain-body">Authority queries Beatport and Spotify APIs and returns the complete published catalog: every ISRC, every version, every release date. The first run pulls the full back catalog; every run after that, only what's new. One file per artist, from day one of the relationship.</p>
+                    </div>
                 </div>
-                <div class="pain-cell reveal reveal-delay-2">
-                    <div class="pain-icon">🔁</div>
-                    <div class="pain-head">Your IPI/CAE data, injected at the ISRC level.</div>
-                    <p class="pain-body">Your validated IPI/CAE codes, society affiliations, writer and publisher data get entered once per artist, then applied automatically to every ISRC Authority finds. The output carries both layers: the technical record from the platform, and the legal identity from your roster.</p>
+                <div class="pain-row reveal reveal-delay-2">
+                    <div class="pain-num">02</div>
+                    <div>
+                        <div class="pain-head">Your IPI/CAE data, injected at the ISRC level.</div>
+                        <p class="pain-body">Your validated IPI/CAE codes, society affiliations, writer and publisher data get entered once per artist, then applied automatically to every ISRC Authority finds. The output carries both layers: the technical record from the platform, and the legal identity from your roster.</p>
+                    </div>
                 </div>
-                <div class="pain-cell reveal reveal-delay-3">
-                    <div class="pain-icon">⚠️</div>
-                    <div class="pain-head">One sheet. Every field your workflow needs.</div>
-                    <p class="pain-body">The master sheet covers every publishing field: ISRC, UPC, title, version, label, release date, IPI/CAE, society, splits. It's formatted for direct import into royalty management systems, CWR generators, or PRO portals, and remixes or alternative versions get flagged and routed to a dedicated sheet automatically.</p>
+                <div class="pain-row reveal reveal-delay-3">
+                    <div class="pain-num">03</div>
+                    <div>
+                        <div class="pain-head">One sheet. Every field your workflow needs.</div>
+                        <p class="pain-body">The master sheet covers every publishing field: ISRC, UPC, title, version, label, release date, IPI/CAE, society, splits. It's formatted for direct import into royalty management systems, CWR generators, or PRO portals, and remixes or alternative versions get flagged and routed to a dedicated sheet automatically.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -450,12 +478,11 @@
     </section>
 
     <!-- ABOUT -->
-    <section class="section" id="about">
+    <section class="section" id="about" style="padding: 100px 0;">
         <div class="wrap">
             <div class="about-grid">
                 <div class="sticky-col">
-                    <p class="sec-label reveal">The person behind it</p>
-                    <h2 class="about-name reveal reveal-delay-1">Mosè<br><em>Ruggiero</em></h2>
+                    <h2 class="about-name reveal">Mosè<br><em>Ruggiero</em></h2>
                     <p class="about-role reveal reveal-delay-2">
                         Senior System Integrator<br>
                         Enterprise Integration · Data Pipelines<br>
@@ -513,10 +540,9 @@
     </section>
 
     <!-- FAQ -->
-    <section class="section" id="faq">
+    <section class="section" id="faq" style="padding: 90px 0;">
         <div class="wrap">
-            <p class="sec-label reveal">Before you write in</p>
-            <h2 class="sec-title reveal reveal-delay-1">Common questions,<br><em>answered directly.</em></h2>
+            <h2 class="sec-title reveal">Common questions,<br><em>answered directly.</em></h2>
             <div style="border-top:1px solid var(--border);">
                 <div class="reveal reveal-delay-1" style="padding:28px 0; border-bottom:1px solid var(--border);">
                     <div class="feat-title" style="margin-bottom:8px;">What do you need from me to run the free sample?</div>
@@ -548,7 +574,7 @@
             <p class="pitch-text">
                 Built for music publishers and rights managers.<br><em>See it work on your own catalog, free.</em>
             </p>
-            <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI'd%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="btn-cta">Get a Free Sample Report →</a>
+            <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI%E2%80%99d%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="btn-cta">Get a free sample →</a>
         </div>
     </div>
 
@@ -557,14 +583,13 @@
         <div class="wrap">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
                 <div>
-                    <p class="sec-label reveal">Get in touch</p>
-                    <h2 class="sec-title reveal reveal-delay-1" style="margin-bottom: 24px;">Write<br><em>directly.</em></h2>
+                    <h2 class="sec-title reveal" style="margin-bottom: 24px;">Write<br><em>directly.</em></h2>
                     <p style="font-family:var(--mono);font-size:11px;color:var(--grey-mid);line-height:1.8;letter-spacing:0.02em;max-width:380px;" class="reveal reveal-delay-2">
                         No forms, no demo scheduling. Send one artist from your roster and I’ll run the full extraction free, so you can see exactly what you’d get before we talk about anything else.
                     </p>
                 </div>
                 <div class="reveal reveal-delay-2">
-                    <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI'd%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="contact-email">mose.ruggiero@gmail.com</a>
+                    <a href="mailto:mose.ruggiero@gmail.com?subject=Free%20Sample%20Report%20Request&body=Hi%20Mos%C3%A8%2C%0A%0AI%E2%80%99d%20like%20to%20see%20a%20free%20sample%20catalog%20report%20for%20one%20artist.%0A%0AArtist%20name%3A%20%0ABeatport%20or%20Spotify%20link%3A%20%0A%0AThanks!" class="contact-email">mose.ruggiero@gmail.com</a>
                 </div>
             </div>
         </div>
